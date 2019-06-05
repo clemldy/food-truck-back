@@ -15,10 +15,17 @@ namespace 'populate' do
       t.name          = row['Applicant']
       t.facility_type = row['FacilityType']
       t.status        = row['Status']
-      t.food_items    = row['FoodItems']
+      t.address       = row['Address']
       t.latitude      = row['Latitude']
       t.longitude     = row['Longitude']
       t.save
+      row['FoodItems']&.split(':')&.each do |item|
+        if existing_item = Item.find_by_name(item.strip)
+          t.items << existing_item
+        else
+          t.items.create(name: item.strip)
+        end
+      end
     end
 
     puts "There are now #{FoodTruck.count} rows in the food_trucks table"

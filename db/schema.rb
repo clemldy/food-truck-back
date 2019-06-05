@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_155509) do
+ActiveRecord::Schema.define(version: 2019_06_05_170057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "food_truck_items", force: :cascade do |t|
+    t.bigint "food_truck_id"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_truck_id"], name: "index_food_truck_items_on_food_truck_id"
+    t.index ["item_id"], name: "index_food_truck_items_on_item_id"
+  end
 
   create_table "food_trucks", force: :cascade do |t|
     t.integer "location_id"
@@ -25,6 +34,15 @@ ActiveRecord::Schema.define(version: 2019_06_04_155509) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
   end
 
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "food_truck_items", "food_trucks"
+  add_foreign_key "food_truck_items", "items"
 end
