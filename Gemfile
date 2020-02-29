@@ -11,7 +11,7 @@ gem 'bootsnap',     '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder',     '~> 2.5'
 gem 'geocoder'
-gem 'puma',         '~> 3.11'
+gem 'puma',         '~> 3.12'
 gem 'rack-cors'
 gem 'sass-rails',   '~> 5.0'
 gem 'turbolinks',   '~> 5'
